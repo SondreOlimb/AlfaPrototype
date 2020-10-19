@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+    <h1>Post</h1>
+
+<div class="row justify-content-md-center">
+
+
+    {% for post in object_list %}
+        <div class="col col-md-auto">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body bg-dark">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">- {{ post.author.first_name }} {{ post.author.last_name }} <br/> {{ post.body }} </p>
+            <a href="{% url "article-detail" post.pk %}" class="btn btn-secondary">To post</a>
+  </div>
+</div>
+
+        </div>
+
+    {%  endfor %}
+
+
+
+
+
+</div>
+
+{% endblock %}
+
