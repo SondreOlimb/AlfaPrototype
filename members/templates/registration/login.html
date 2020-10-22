@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ "Login"}}
+{% endblock %}
+{% block content %}
+
+
+
+
+<div class = "container" >
+<h1 class= " text-center" >Login</h1>
+<div class="form-group">
+    <form  method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button  class="btn btn-dark">login</button>
+
+
+    </form>
+
+    <h3>Dont have and account? </h3>
+    <a href="{% url "register" %}" class="btn-sm btn-dark">Register her</a>
+</div>
+</div>
+
+
+
+</div>
+
+{% endblock %}

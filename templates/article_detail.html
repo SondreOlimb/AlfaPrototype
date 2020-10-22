@@ -5,14 +5,21 @@
 
 {% block content %}
 
+<div class="container">
 <h1>{{ post.title  }}</h1>
-<small>By: {{ post.author.first_name }} {{ post.author.last_name }}</small><br/>
+<small>By: {{ post.author.first_name }} {{ post.author.last_name }}<br/>
+    published: {{ post.post_date  }}
+    {% if user.is_authenticated and post.author == request.user %}
+<a href="{% url "update_post" post.pk %}" class="btn-sm btn-secondary">Edit</a>
+    <a href="{% url "delete_post" post.pk %}" class="btn-sm btn-secondary">Delete</a>
+    {% endif %}
+</small><br/>
 <hr>
 <br/>
-{{ post.body }}
+{{ post.body|safe }}
 
 <br/><br/>
 <a href="{% url "blog" %}" class="btn btn-secondary">Back</a>
-
+</div>
 
 {% endblock %}

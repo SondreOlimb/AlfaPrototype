@@ -1,8 +1,8 @@
 
 {% load static %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-  <a class="navbar-brand w-75" href={% url "landing" %} >
-      <img src="{% static "images/logo-alfa-explorer.svg" %}" class="img-fluid" >
+  <a class=" navbar-brand " href={% url "landing" %} >
+      <img  src="{% static "images/logo-alfa-explorer.svg" %}" class="  img-fluid" style="max-width: 50vw">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -12,19 +12,41 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
     <ul class="navbar-nav mr-auto">
-
+        <li class="nav-item">
+        <a class="nav-link" style="margin-right: 1rem" href={% url "blog" %}>Blog</a>
+        </li>
     </ul>
     <form class="form-inline">
         <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" style="margin-right: 1rem" href={% url "blog" %}>Blog</a>
 
-      </li>
+        {% if user.is_authenticated %}
 
-        <li class="nav-item">
+            <li class="nav-item">
+                <a class="nav-link" style="margin-right: 1rem" href={% url "add_post" %}>Add post</a>
 
-        <button type="button" class="btn btn-outline-ligth" style="margin-right: 1rem">Log in</button>
-        </li>
+            </li>
+
+            <li class="nav-item">
+                <a href="{% url "logout" %}" class="btn btn-outline-light">Logout</a>
+            </li>
+
+
+            {% else %}
+
+
+            <li class="nav-item">
+            <a href="{% url "login" %}" class="btn btn-outline-light">Login</a>
+
+            </li>
+
+            {% endif %}
+
+
+
+
+
+
+
         </ul>
 
 

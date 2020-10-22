@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ "Create new blog post"}}
+{% endblock %}
+{% block content %}
+
+
+
+{% if user.is_authenticated %}
+    <div class = "container" >
+    <h1 class= " text-center" >Add post</h1>
+    <div class="form-group">
+        <form  method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button  class="btn btn-dark">Post</button>
+
+
+        </form>
+    </div>
+    </div>
+    {% else %}
+        <div class = "container" >
+        <h1 class = "text-center">Please login</h1>
+        </div>
+
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
