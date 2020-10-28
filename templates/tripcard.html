@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+{% block content %}
+<head>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+
+<!--forntaawsome-->
+      <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
+      <link href="/your-path-to-fontawesome/css/brands.css" rel="stylesheet">
+      <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet">
+    <!-- fontaawsome end-->
+</head>
+
+    <script>
+    function myFunction(x) {
+  x.classList.toggle("fa-angle-up");
+}
+    </script>
+
+
+
+
+
+
+
+
+<div class ="coloum shadow  rounded bg-dark" >
+<br/>
+
+    <div class="col-fluid order-2 align-items-center d-flex flex-column" >
+        <img class="img-fluid rounded-circle "  alt="100x100" src="{% static "images/sondre.jpg" %}" style = "width: 10rem; height: 10rem">
+        {{ post.author.first_name }} {{ post.author.last_name }}
+        <br/>
+        <br/>
+
+
+
+        <div class="collapse" id="collapseExample" style="width: 100%">
+          <div class="card bg-dark card-body align-items-center d-flex" style="width: 100%">
+           <i class="fab fa-instagram fa-3x"></i>
+          </div>
+        </div>
+
+        <p>
+
+      <a class="btn btn-transparent  " type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+         <i onclick="myFunction(this)"  class="fas fa-angle-down fa-2x" style="color:red" ></i>
+      </a>
+        </p>
+    </div>
+    <br/>
+    <div class="col-fluid order-2 align-items-center d-flex"  >
+            <div class="container-fluid" style="  width:28rem; " >
+
+                <div id='map'  class= " rounded " style=' width: 100%; height:200px; padding: 0; margin: 0;'></div>
+                    <script>
+                    mapboxgl.accessToken = 'pk.eyJ1Ijoib2xpbWIiLCJhIjoiY2s2NndvNmtrMDVzcTNvbzZ3d2tmcTZiZiJ9.ZNfFTZhI4BZFGoT0qzZT2A';
+                    var map = new mapboxgl.Map({
+                        container: 'map',
+                        style: 'mapbox://styles/mapbox/light-v10',
+                        center: [8.755639,61.480532],
+                        zoom: 11
+                    });
+
+                    var marker = new mapboxgl.Marker()
+                        .setLngLat([8.755639,61.480532])
+                        .addTo(map);
+
+                    </script>
+    </div>
+
+        <br/>
+        <br/>
+
+        </div>
+        <br/>
+
+
+</div>
+
+{% endblock %}

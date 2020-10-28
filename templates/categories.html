@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+{% if category_posts %}
+
+
+
+    <ul>
+    <div class ="justify-content-center"  >
+    <h1>{{ cats }}</h1> <br/> <br/>
+    {% for post in category_posts %}
+
+    <div class="justify-content-center " >
+
+
+        <div class="card-columns justify-content-center" >
+
+                <div class="card " style="width: 18rem;">
+                    <div class="card-body bg-dark" >
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">- {{ post.author.first_name }} {{ post.author.last_name }} <br/> {{ post.body|slice:":200"|safe}} </p>
+                    <a href="{% url "article-detail" post.pk %}" class="btn btn-secondary">Open</a>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+        </div>
+
+
+    {% endfor %}
+
+    </div>
+    </ul>
+    {% else %}
+    <h1>This page dose not exist</h1>
+    {% endif %}
+
+
+{% endblock %}

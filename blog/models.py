@@ -4,12 +4,26 @@ from datetime import datetime,date
 
 from django.contrib.auth.models import User
 
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+
+
+    def __str__(self):
+        return self.name  # lets us se the title o the blog page in the admin page
+
+
+    def get_absolute_url(self):
+        return reverse("landing")  # this element loads the post after publishing
+        # return reverse("blog")  #if we want to jump to return after
+
+
 class Post(models.Model):
     title = models.CharField(max_length=255)
     title_tag=models.CharField(max_length=255)
     author =models.ForeignKey(User, on_delete=models.CASCADE)  #this line deletes all elements created by this user if this user is deleted
     body = models.TextField()
     post_date = models.DateTimeField(auto_now_add=True)
+    category = models.CharField(max_length=255, default="uncategorized")
 
 
 

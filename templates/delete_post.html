@@ -6,7 +6,7 @@
 
 
 
-{% if user.is_authenticated %}
+{% if user.is_authenticated and post.author.id == request.user.id%}
     <div class = "container" >
     <h1 class= " text-center" >
         Delete Post
