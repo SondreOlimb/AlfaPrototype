@@ -13,7 +13,7 @@
 </head>
 
 
-<div class="container-fluid w-100 "  style="background: rgba(36, 36, 36, 0.6);   min-height: 100vh; margin-right: auto !important; margin-left:auto!important;  padding-left: 0 !important;padding-right: 0 !important" " >
+<div class="container-fluid w-100 "  style="background: rgba(36, 36, 36, 0.6);   min-height: 100vh; margin-right: auto !important; margin-left:auto!important;  padding-left: 0 !important;padding-right: 0 !important" >
 
 <!--carousel begin-->
 
@@ -61,12 +61,20 @@
             </small>
     </div>
     <div class="align-self-center" style="margin-left: 10px">
+        <form action="{% url 'like_post' post.pk %}" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-link " type="submit",name="post_id" value="{{ post.id }}">
+            <i class="far fa-thumbs-up fa-1x" style="color:white; "></i>
+            </button>
+        </form>
 
-        <i class="far fa-thumbs-up fa-1x"></i>
+
     </div>
-    <div class="align-self-center" style="margin-left: 10px">
+    <div class="align-self-center" style="margin-left: 1px">
+        {{ total_likes }}
 
-        <i class="far fa-heart fa-1x"></i>
+
+
     </div>
 </div>
 <hr style=" background-color:white;">

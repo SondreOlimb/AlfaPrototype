@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
 from .models import Post,Category
 from .forms import PostForm,EditForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy,reverse
+from django.http import HttpResponseRedirect
+from myBlog.settings import MAPBOX_KEY
+
 
 choices =Category.objects.all().values_list("name","name")
 
@@ -33,6 +36,16 @@ class HomeView(ListView):
 class ArticleDetailView(DetailView):
     model = Post
     template_name = 'article_detail.html'
+
+    def get_context_data(self, *args, **kwargs): #this needs to bee aded to evry view that wants the category data
+        cat_menu = Category.objects.all()
+        context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
+        fetch_likes = get_object_or_404(Post, id=self.kwargs["pk"])
+        total_likes = fetch_likes.total_likes()
+        context["cat_menu"] = cat_menu
+        context["total_likes"] = total_likes
+        context["mapbox_access_token"] = MAPBOX_KEY
+        return context
 
 def landing(request):
     return render(request, "landing.html",{})
@@ -66,6 +79,15 @@ def CategoryView(request,cats):
     category_posts = Post.objects.filter(category=cats.replace("-"," "))
 
     return render(request, "categories.html", {"cats":cats.title().replace("-"," "),"category_posts":category_posts}) #cats:cats passes the cats to the webpage
+
+def LikeView(request,pk):
+
+    post = Post.objects.get(id=pk)
+    post.likes.add(request.user)
+
+    return HttpResponseRedirect(reverse("article-detail",args=[str(pk)]))
+
+
 
 
 
