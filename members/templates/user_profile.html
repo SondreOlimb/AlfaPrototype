@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid w-100 "  style="background: rgba(36, 36, 36, 0.6);   min-height: 100vh; margin-right: auto !important; margin-left:auto!important;  padding-left: 0 !important;padding-right: 0 !important" >
+<br/>
+    <div class =container>
+    <div class="col-fluid order-2 align-items-center d-flex flex-column" >
+    {% if page_user.profile_pic%}
+        <img class="img-fluid rounded-circle "  alt="100x100" src="{{ page_user.profile_pic.url }}" style = "width: 10rem; height: 10rem">
+    {% else %}
+        <img class="img-fluid rounded-circle "  alt="100x100" src="{% static "images/profil.png" %}" style = "width: 10rem; height: 10rem">
+    {% endif %}
+        <h1>{{ page_user.user.first_name }} {{ page_user.user.last_name }}</h1>
+    <p>{{ page_user.bio }}</p>
+    </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}

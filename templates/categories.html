@@ -11,40 +11,43 @@
 
 
     <ul>
-    <div class ="justify-content-center"  >
-    <h1>{{ cats }}</h1> <br/> <br/>
-    {% for post in category_posts %}
-
-    <div class="justify-content-center " >
+    <div class ="container justify-content-center text-centre"  >
+    <h1 class="text-center">{{ cats }}</h1> <br/> <br/>
 
 
-        <div class="card-columns justify-content-center" >
 
-                <div class="card " style="width: 18rem;">
-                    <div class="card-body bg-dark" >
+
+
+        <div class="card-columns justify-content-center mx-auto "  >
+            {% for post in category_posts %}
+
+                <div class="card rounded bg-transparent " style="width: 20rem; max-height: 30rem; ">
+                {% if post.header_image %}
+                    <img src={{ post.header_image.url }} class="card-img-top" alt="..." style="object-fit: cover; height: 150px">
+                    {% endif %}
+                    <div class="card-body rounded-bottom bg-dark" >
                     <h5 class="card-title">{{ post.title }}</h5>
-                    <p class="card-text">- {{ post.author.first_name }} {{ post.author.last_name }} <br/> {{ post.body|slice:":200"|safe}} </p>
+                    <p class="card-text">- {{ post.author.first_name }} {{ post.author.last_name }} <br/> {{ post.snippet|safe}} </p>
                     <a href="{% url "article-detail" post.pk %}" class="btn btn-secondary">Open</a>
+                        <a href="{% url "category" post.category|slugify %}" class="btn btn-secondary">{{ post.category }}</a>
 
                     </div>
                 </div>
 
 
+            {%  endfor %}
 
-
-
-
-
+        </div>
 
 
         </div>
 
 
 
-        </div>
 
 
-    {% endfor %}
+
+
 
     </div>
     </ul>

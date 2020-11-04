@@ -42,9 +42,16 @@ class ArticleDetailView(DetailView):
         context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
         fetch_likes = get_object_or_404(Post, id=self.kwargs["pk"])
         total_likes = fetch_likes.total_likes()
+
+        liked = False
+        if fetch_likes.likes.filter(id=self.request.user.id).exists():
+            liked = True
+
+
         context["cat_menu"] = cat_menu
         context["total_likes"] = total_likes
         context["mapbox_access_token"] = MAPBOX_KEY
+        context["liked"]=liked
         return context
 
 def landing(request):
@@ -77,13 +84,21 @@ class DeletePostView(DeleteView):
 
 def CategoryView(request,cats):
     category_posts = Post.objects.filter(category=cats.replace("-"," "))
+    ordering = ["-category_posts.post_date"]
 
     return render(request, "categories.html", {"cats":cats.title().replace("-"," "),"category_posts":category_posts}) #cats:cats passes the cats to the webpage
 
 def LikeView(request,pk):
 
     post = Post.objects.get(id=pk)
-    post.likes.add(request.user)
+
+    liked = False
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+        liked=False
+    else:
+        post.likes.add(request.user)
+        liked =True
 
     return HttpResponseRedirect(reverse("article-detail",args=[str(pk)]))
 

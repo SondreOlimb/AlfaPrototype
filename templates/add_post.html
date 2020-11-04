@@ -4,6 +4,9 @@
 {% endblock %}
 {% block content %}
 
+    <style>
+
+    </style>
 
 
 
@@ -11,8 +14,9 @@
     <div class = "container" >
     <h1 class= " text-center" >Add post</h1>
     <div class="form-group">
-        <form  method="POST">
+        <form  method="POST" enctype="multipart/form-data">
             {% csrf_token %}
+            {{ form.media }}
             {{ form.as_p }}
             <button  class="btn btn-dark">Post</button>
 
@@ -33,6 +37,8 @@
 
 
     {% endif %}
+
+
 
 </div>
 

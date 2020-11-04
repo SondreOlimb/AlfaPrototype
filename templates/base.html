@@ -1,5 +1,8 @@
 {% load static %}
 <!doctype html>
+<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -25,6 +28,7 @@
    body {
 
    color: white;
+       font-family: 'Roboto', sans-serif;
 
    margin:0;} /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
 </style>
@@ -51,6 +55,7 @@
 
 <div  style = " min-height: 100vh">
       {% block content %}
+
     {% endblock %}
 </div>
     {% include "footer.html" %}

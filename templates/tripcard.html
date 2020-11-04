@@ -29,23 +29,42 @@
 <br/>
 
     <div class="col-fluid order-2 align-items-center d-flex flex-column" >
-        <img class="img-fluid rounded-circle "  alt="100x100" src="{% static "images/sondre.jpg" %}" style = "width: 10rem; height: 10rem">
+    <a href="{% url "show_profile_page" post.author.profile.id %}">
+    {% if post.author.profile.profile_pic%}
+
+        <img class="img-fluid rounded-circle "  alt="100x100" src="{{ post.author.profile.profile_pic.url }}" style = "width: 10rem; height: 10rem">
+    {% else %}
+        <img class="img-fluid rounded-circle "  alt="100x100" src="{% static "images/profil.png" %}" style = "width: 10rem; height: 10rem">
+    {% endif %}
+    </a>
+    <br/>
+    <a href="{% url "show_profile_page" post.author.profile.id %}" style="color: white">
         {{ post.author.first_name }} {{ post.author.last_name }}
-        <br/>
+    </a>
+
+
         <br/>
 
 
 
         <div class="collapse" id="collapseExample" style="width: 100%">
-          <div class="card bg-dark card-body align-items-center d-flex" style="width: 100%">
-           <i class="fab fa-instagram fa-3x"></i>
+          <div class="card bg-dark card-body align-items-center d-flex border-0" style="width: 100%">
+              {{ post.author.profile.bio }}
+
+              {% if post.author.profile.instagram_url %}
+              <a class = "text-light" href="{{ post.author.profile.instagram_url }}">
+              <br/>
+                <i class="fab fa-instagram fa-3x"></i>
+                  </a>
+              {% endif %}
+
 
           </div>
         </div>
 
         <p>
 
-      <a class="btn btn-transparent  " type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      <a style = " margin: 0 !important;" class="btn btn-transparent  " type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
          <i onclick="myFunction(this)"  class="fas fa-angle-down fa-2x" style="color:red" ></i>
       </a>
         </p>
