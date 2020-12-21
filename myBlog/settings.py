@@ -21,9 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','n2^_0$e48!(xrlhu+owud^&$5ag4zdicy&+a4wtqmn__(5of!=')
+#n2^_0$e48!(xrlhu+owud^&$5ag4zdicy&+a4wtqmn__(5of!=
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+MAPBOX_KEY = os.environ.get("MAPBOX_API_KEY")
+STRAVA_CLIENT_ID = os.environ.get("STRAVA_client_id")
+STRAVA_CLIENT_SECRET = os.environ.get("STRAVA_client_secret")
+STRAVA_REFRESH_TOKEN = os.environ.get("STRAVA_refresh_token")
 
-MAPBOX_KEY = os.environ.get("mapbox","pk.eyJ1Ijoib2xpbWIiLCJhIjoiY2s2NndvNmtrMDVzcTNvbzZ3d2tmcTZiZiJ9.ZNfFTZhI4BZFGoT0qzZT2A")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

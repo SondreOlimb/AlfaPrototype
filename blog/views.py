@@ -4,7 +4,7 @@ from .models import Post,Category,Profile,AddShoe
 from .forms import PostForm,EditForm
 from django.urls import reverse_lazy,reverse
 from django.http import HttpResponseRedirect
-from myBlog.settings import MAPBOX_KEY
+from myBlog.settings import MAPBOX_KEY ,STRAVA_CLIENT_ID,STRAVA_CLIENT_SECRET,STRAVA_REFRESH_TOKEN
 
 import requests
 import urllib3
@@ -28,6 +28,8 @@ class TripMapView(ListView):
         context = super(TripMapView, self).get_context_data(*args, **kwargs)
         all_posts = Post.objects.all()
         context["all_post"] = all_posts
+        context["mapbox_access_token"] = MAPBOX_KEY
+
         return context
 
 
@@ -81,9 +83,9 @@ class ArticleDetailView(DetailView):
             activites_url = "https://www.strava.com/api/v3/activities/" +str(fetch_likes.strava)
 
             payload = {
-                'client_id': "55603",
-                'client_secret': '14872ecdcc7a9253caf9d6ab15a944c44fc34079',
-                'refresh_token': '8bc42d788d76594365b767a335e6a230b607059f',
+                'client_id': STRAVA_CLIENT_ID,
+                'client_secret': STRAVA_CLIENT_SECRET,
+                'refresh_token': STRAVA_REFRESH_TOKEN,
                 'grant_type': "refresh_token",
                 'f': 'json'
             }
