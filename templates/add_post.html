@@ -11,9 +11,9 @@
 
 
 {% if user.is_authenticated %}
-    <div class = "container" >
+    <div class = "container-fluid w-100" >
     <h1 class= " text-center" >Add post</h1>
-    <div class="form-group">
+    <div class="form-group w-100 justify-content-center" >
         <form  method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.media }}

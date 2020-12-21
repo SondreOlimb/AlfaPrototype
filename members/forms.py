@@ -1,6 +1,57 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
+from blog.models import Profile
 from django import forms
+from blog.models import Profile, AddShoe
+
+shoes =AddShoe.objects.all().values_list("shoe_name","shoe_name")
+
+shoes_list=[]
+
+for item in shoes:
+    shoes_list.append(item)
+
+class ProfilePageForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+
+        fields = ("bio", "profile_pic", "website_url", "facebook_url", "twitter_url", "instagram_url", "pintrest_url")
+
+        widgets = {
+            'website_url': forms.TextInput(attrs={"class": "form-control", "placeholder": "Input title"}),
+            'facebook_url': forms.TextInput(attrs={"class": "form-control", "placeholder": "Input title"}),
+            'twitter_url': forms.TextInput(attrs={"class": "form-control", "placeholder": "Input title"}),
+            'instagram_url': forms.TextInput(attrs={"class": "form-control", "placeholder": "Input title"}),
+            'pintrest_url': forms.TextInput(attrs={"class": "form-control", "placeholder": "Input title"}),
+            "bio": forms.Textarea(attrs={"class": "form-control", "placeholder": "Write short bio"}),
+            #"profile_pic": forms.TextInput(attrs={"class": "form-control", "placeholder": "Input title"})
+        }
+
+class EditProfilePageForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields= ("bio", "profile_pic", "website_url", "facebook_url", "twitter_url", "instagram_url", "pintrest_url","shoes")
+
+        widgets ={
+            'website_url': forms.TextInput(attrs={"class": "form-control", "placeholder": "Input title"}),
+            'facebook_url': forms.TextInput(attrs={"class": "form-control", "placeholder": "Input title"}),
+            'twitter_url': forms.TextInput(attrs={"class": "form-control", "placeholder": "Input title"}),
+            'instagram_url': forms.TextInput(attrs={"class": "form-control", "placeholder": "Input title"}),
+            'pintrest_url': forms.TextInput(attrs={"class": "form-control", "placeholder": "Input title"}),
+            "bio": forms.Textarea(attrs={"class": "form-control", "placeholder": "Write short bio"}),
+            'shoes': forms.CheckboxSelectMultiple(),
+        }
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            for AddShoe in self.fields:
+                self.fields[AddShoe].widget.attrs['class'] = 'form-control'
+
+
+
+
+
 
 class SignUpForms(UserCreationForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "form-control","placeholder":"Input email"}))

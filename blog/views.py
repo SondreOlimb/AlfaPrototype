@@ -1,10 +1,35 @@
 from django.shortcuts import render,get_object_or_404
 from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
-from .models import Post,Category
+from .models import Post,Category,Profile,AddShoe
 from .forms import PostForm,EditForm
 from django.urls import reverse_lazy,reverse
 from django.http import HttpResponseRedirect
 from myBlog.settings import MAPBOX_KEY
+
+import requests
+import urllib3
+import polyline
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+class AddshoeView(CreateView):
+    model = AddShoe
+    template_name = "add_shoe.html"
+    fields = "__all__"
+
+
+
+
+class TripMapView(ListView):
+    model = Post
+    template_name = "trip_map.html"
+    all_posts = Post.objects.all()
+    def get_context_data(self, *args, **kwargs): #this needs to bee aded to evry view that wants the category data
+
+        context = super(TripMapView, self).get_context_data(*args, **kwargs)
+        all_posts = Post.objects.all()
+        context["all_post"] = all_posts
+        return context
+
 
 
 choices =Category.objects.all().values_list("name","name")
@@ -37,8 +62,10 @@ class ArticleDetailView(DetailView):
     model = Post
     template_name = 'article_detail.html'
 
+
     def get_context_data(self, *args, **kwargs): #this needs to bee aded to evry view that wants the category data
         cat_menu = Category.objects.all()
+        shoes = AddShoe.objects.all()
         context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
         fetch_likes = get_object_or_404(Post, id=self.kwargs["pk"])
         total_likes = fetch_likes.total_likes()
@@ -47,18 +74,73 @@ class ArticleDetailView(DetailView):
         if fetch_likes.likes.filter(id=self.request.user.id).exists():
             liked = True
 
+         #only fetches the strava api the first time the blog is visited, after that it is saved in the database
+        if fetch_likes.strava and fetch_likes.polyline == str(0):
+            auth_url = "https://www.strava.com/oauth/token"
+            # activites_url = "https://www.strava.com/api/v3/athlete/activities/{4056947490}"
+            activites_url = "https://www.strava.com/api/v3/activities/" +str(fetch_likes.strava)
+
+            payload = {
+                'client_id': "55603",
+                'client_secret': '14872ecdcc7a9253caf9d6ab15a944c44fc34079',
+                'refresh_token': '8bc42d788d76594365b767a335e6a230b607059f',
+                'grant_type': "refresh_token",
+                'f': 'json'
+            }
+
+            res = requests.post(auth_url, data=payload, verify=False)
+            access_token = res.json()["access_token"]
+
+            header = {'Authorization': 'Bearer ' + access_token}
+            param = {'per_page': 2, 'page': 1}
+            my_dataset = requests.get(activites_url, headers=header, params=param).json()
+            strava_tempsave = my_dataset["map"]["polyline"]
+            path = polyline.decode(strava_tempsave, geojson=True)
+            fetch_likes.polyline = strava_tempsave
+            fetch_likes.save()
+            poly = []
+            for i in path:
+                poly.append([i[0], i[1]])
+
+            context["poly"] = poly
+
+        elif fetch_likes.polyline != str(0):
+            path = polyline.decode(fetch_likes.polyline, geojson=True)
+            poly = []
+            for i in path:
+                poly.append([i[0], i[1]])
+
+            context["poly"] = poly
+
 
         context["cat_menu"] = cat_menu
         context["total_likes"] = total_likes
         context["mapbox_access_token"] = MAPBOX_KEY
         context["liked"]=liked
+        context["shoes"] = shoes
         return context
 
-def landing(request):
-    return render(request, "landing.html",{})
 
-def google(request):
-    return render(request, "google.html",{})
+
+
+
+
+
+
+class LandingView(ListView):
+    model = Profile
+    template_name = "landing.html"
+
+    def get_context_data(self, *args, **kwargs): #this needs to bee aded to evry view that wants the category data
+
+        context = super(LandingView, self).get_context_data(*args, **kwargs)
+        all_profiles = Profile.objects.all()
+        context["all_profiles"] = all_profiles
+        return context
+
+
+
+
 
 class AddPostView(CreateView):
     model = Post
@@ -101,6 +183,9 @@ def LikeView(request,pk):
         liked =True
 
     return HttpResponseRedirect(reverse("article-detail",args=[str(pk)]))
+
+
+
 
 
 

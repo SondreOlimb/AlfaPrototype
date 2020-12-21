@@ -27,7 +27,7 @@
       <img class="d-block w-100" src={{ post.header_image.url }} alt="First-slide" style = "object-fit: cover !important; min-width: 150vmin !important; height: 40vmax !important; " >
         <div class="carousel-caption  d-md-block">
              <h5 style="font-size:6vw;">{{ post.title  }}</h5>
-                <p style="font-size:3vw;">By: {{ post.author.first_name }} {{ post.author.last_name }}</p>
+                <!-- <p style="font-size:2vw;">By: {{ post.author.first_name }} {{ post.author.last_name }}</p> -->
         </div>
     </div>
 
@@ -39,21 +39,21 @@
      {% else %}
             <div class="container  d-md-block text-center">
                      <h5 style="font-size:6vw;">{{ post.title  }}</h5>
-                        <p style="font-size:2vw;">By: {{ post.author.first_name }} {{ post.author.last_name }}</p>
+                       <!-- <p style="font-size:2vw;">By: {{ post.author.first_name }} {{ post.author.last_name }}</p> -->
                 </div>
 
 {% endif %}
 <div class = "container d-flex row align-items-center" style ="margin-top: 5px;">
     <div style="margin-left: 10px">
 
-            <small>
-                published: {{ post.post_date  }}
+            <strong>
+                Published: {{ post.post_date  }}
                 {% if user.is_authenticated and post.author.id == request.user.id %}
             <a href="{% url "update_post" post.pk %}" class="btn-sm btn-secondary">Edit</a>
                 <a href="{% url "delete_post" post.pk %}" class="btn-sm btn-secondary">Delete</a>
                 {% endif %}
 
-            </small>
+            </strong>
     </div>
     <div class="align-self-center" style="margin-left: 10px">
     {% if user.is_authenticated %}
@@ -91,22 +91,26 @@
 <br/>
 
 <div class="container-fluid" >
-  <div class="row" >
-      <div class="col-xl order-xl-2" style="max-width: 500px">
-          <div>
+  <div class="row p-md-4 m-md-4 " >
+      <div class="col-12 col-md-4 order-2 order-md-3 justify-content-center" >
+          <div >
                 {% include "tripcard.html" %}
           </div>
     </div>
-    <div class="col-xl-8 order-xl-1" >
-         {{ post.snippet|safe}}
+    <div class="col-12 col-md-6 order-1 order-md-1"  >
+
+        <strong><h4 style ="font-size: max(2vw, 2vh); font-weight: bold">{{ post.snippet|safe}} </h4></strong>
         <br/>
-        <br/>
-        <br/>
-        {{ post.body|safe }}
-        <br/><br/>
-    <a href="{% url "blog" %}" class="btn btn-secondary">Back</a>
+
+
+
 
     </div>
+      <div class = "col-12 col-md-8  order-3 order-md-2" >
+          <br/>
+          <h5>{{ post.body|safe }}</h5>
+          <a href="{% url "blog" %}" class="btn btn-secondary">Back</a>
+      </div>
 
 
   </div>
@@ -116,6 +120,7 @@
 
 
 
+</br>
 
 </div>
 

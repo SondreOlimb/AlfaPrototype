@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+
+{% load static %}
+{% block content %}
 <style>
     footer {
             text-align: center;
@@ -12,12 +14,15 @@
 
 <footer>
   <div class = "container align-items-center d-flex" >
-      <div class ="container">
+      <div class ="container" >
     <a class = "text-light" href=https://www.instagram.com/alfasko/?hl=en><i class="fab fa-instagram fa-3x"></i></a>
           </div>
 
-      <div class ="container">
-    <a class = " text-light" href=#><i class="far fa-copyright"> Sondre Olimb</i></a>
+      <div class ="container  m-0 p-0" >
+          <a class = " text-light align-items-center text-center m-0 p-0" href=#><p class="align-self-center" style="margin: 0"><i class="far fa-copyright"></i>  Sondre Olimb</p></a>
           </div>
       </div>
 </footer>
+
+
+{% endblock %}

@@ -16,6 +16,20 @@ class Category(models.Model):
         return reverse("landing")  # this element loads the post after publishing
         # return reverse("blog")  #if we want to jump to return after
 
+class AddShoe(models.Model):
+    shoe_name = models.CharField(max_length=255)
+    link_picture =models.CharField(max_length=255)
+    link_shoe = models.CharField(max_length=255,default=0)
+
+
+    def __str__(self):
+        return self.shoe_name  # lets us se the title o the blog page in the admin page
+
+
+    def get_absolute_url(self):
+        return reverse("landing")  # this element loads the post after publishing
+        # return reverse("blog")  #if we want to jump to return after
+
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
@@ -27,7 +41,12 @@ class Post(models.Model):
     #body = models.TextField()
     post_date = models.DateTimeField(auto_now_add=True)
     category = models.CharField(max_length=255, default="uncategorized")
+    shoes = models.CharField(max_length=255, default="0")
     likes = models.ManyToManyField(User,related_name="blog_posts")
+    strava =models.IntegerField(default=0)
+    lat = models.DecimalField(max_digits=10, decimal_places=8,default=0)
+    lng = models.DecimalField(max_digits=11, decimal_places=8,default=0)
+    polyline = models.CharField(max_length=100000, default=0)
 
 
 
@@ -53,8 +72,12 @@ class Profile(models.Model):
     twitter_url = models.CharField(null=True, blank=True, max_length=255)
     instagram_url = models.CharField(null=True, blank=True,max_length=255)
     pintrest_url = models.CharField(null=True, blank=True,max_length=255)
+    shoes = models.ManyToManyField(AddShoe)
 
 
 
     def __str__(self):
         return str(self.user)
+
+    def get_absolute_url(self):
+        return reverse("show_profile_page", args=[str(self.id)])

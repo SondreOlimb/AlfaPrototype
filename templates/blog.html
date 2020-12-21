@@ -9,7 +9,7 @@
 
 
 
-<div class ="container-fluid w-100 justify-content-center" style="background: rgba(36, 36, 36, 0.6);   min-height: 100vh; margin-right: auto !important; margin-left:auto!important;  padding-left: 0 !important;padding-right: 0 !important" >
+<div class ="container-fluid w-100 justify-content-center"  >
 <br/>
 <h1 style = "font-size: 10vh"  class= " text-center " >Blog</h1>
 
@@ -29,10 +29,10 @@
                             <div class="carousel-item active">
                               <img class="d-block w-100" src="{{ post.header_image.url }}"  alt="..." style = "object-fit: cover !important; min-width: 150vmin !important; height: 40vmax !important; ">
                                 <div class="carousel-caption  d-md-block">
-                                    <a class = "text-light" href="{% url "article-detail" post.pk %}" >
+                                    <a style ="text-decoration: none" class = "text-light" href="{% url "article-detail" post.pk %}" >
                                      <h5 style="font-size:6vw;">{{ post.title  }}</h5>
                                         </a>
-                                        <p style="font-size:3vw;">By: {{ post.author.first_name }} {{ post.author.last_name }}</p>
+                                        <p style="font-size:2.5vw;">{{ post.author.first_name }} {{ post.author.last_name }}</p>
 
                                 </div>
 
@@ -41,10 +41,10 @@
                                <div class="carousel-item">
                               <img class="d-block w-100" src="{{ post.header_image.url }}"  alt="..." style = "object-fit: cover !important; min-width: 150vmin !important; height: 40vmax !important; ">
                                <div class="carousel-caption  d-md-block">
-                                    <a style = "color: white" href="{% url "article-detail" post.pk %}" >
+                                    <a style = "color: white; text-decoration: none" class = "text-light" href="{% url "article-detail" post.pk %}" >
                                      <h5 style="font-size:6vw;">{{ post.title  }}</h5>
                                         </a>
-                                        <p style="font-size:3vw;">By: {{ post.author.first_name }} {{ post.author.last_name }}</p>
+                                        <p style="font-size:2.5vw;">{{ post.author.first_name }} {{ post.author.last_name }}</p>
 
                                 </div>
                             </div>
