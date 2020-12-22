@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post,Category, AddShoe
+from .models import Post,Category,AddShoe
 
 shoes = AddShoe.objects.all().values_list("shoe_name","shoe_name")
 
