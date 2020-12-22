@@ -36,6 +36,7 @@ class Post(models.Model):
     title_tag=models.CharField(max_length=255)
     author =models.ForeignKey(User, on_delete=models.CASCADE)  #this line deletes all elements created by this user if this user is deleted
     header_image = models.ImageField(null=True, blank=True, upload_to="images/")
+    header_image_url=models.CharField(max_length=255, default="0")
     body =RichTextField(blank=True,null=True)
     snippet = models.CharField(max_length=255)
     #body = models.TextField()

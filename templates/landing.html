@@ -21,9 +21,7 @@
         <h1 style ="font-size: 10vmin;" >Discover your next adventure</h1>
 <br/>
     <br/>
-    <br/>
-        <br/>
-    <br/>
+
 
     </div>
 
@@ -35,25 +33,27 @@
 
 
 
-    <div class="container-fluid   justify-content-center d-none d-lg-block">
+    <div class="container-fluid justify-content-center d-none d-lg-block" style="width: 70%">
 
-    <div class="row justify-content-center text-center m-0 p-0  "  >
+    <div class="row justify-content-center text-center m-0 p-0 "  >
     {% for profile in all_profiles|slice:":3" %}
 
         {% if profile.profile_pic %}
+            <div class="col-4">
             <a class = "text-ligth" style ='text-decoration: none; color: white ' href="{% url "show_profile_page" profile.id %}">
 
-            <div class=" col-12 align-items-center justify-content-center d-flex flex-column text-center " >
+            <div class="align-items-center justify-content-center d-flex flex-column text-center "  >
                 {% if profile.profile_pic%}
                     <img class="img-fluid rounded-circle "  alt="100x100" src="{{ profile.profile_pic.url }}" style = "width: 10rem; height: 10rem">
                 {% else %}
                     <img class="img-fluid rounded-circle "  alt="100x100" src="{% static "images/profil.png" %}" style = "width: 10rem; height: 10rem">
                 {% endif %}
-                    <h1>{{ profile.user.first_name }} {{ profile.user.last_name }}</h1>
+                    <h2>{{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
                 </div>
 
 
             </a>
+            </div>
 
         {% endif %}
     {% endfor %}

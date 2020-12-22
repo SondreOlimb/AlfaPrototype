@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,12 +22,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#n2^_0$e48!(xrlhu+owud^&$5ag4zdicy&+a4wtqmn__(5of!=
+
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+
+
+#API KEYS
 MAPBOX_KEY = os.environ.get("MAPBOX_API_KEY")
 STRAVA_CLIENT_ID = os.environ.get("STRAVA_client_id")
 STRAVA_CLIENT_SECRET = os.environ.get("STRAVA_client_secret")
 STRAVA_REFRESH_TOKEN = os.environ.get("STRAVA_refresh_token")
+
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -47,7 +52,9 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     "members",
     "ckeditor",
-    "django_quill"
+    "django_quill",
+    "storages"
+
 
 ]
 
@@ -152,7 +159,7 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
         # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
         'height': '50vh',
-        'width': '95vw',
+        'width': '80vw',
         # 'filebrowserWindowHeight': 725,
         #'filebrowserWindowWidth': 940,
         'toolbarCanCollapse': True,
@@ -193,20 +200,55 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_REDIRECT_URL = "landing"
+LOGOUT_REDIRECT_URL = "landing"
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+
+#before
 
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 
 STATIC_URL = '/static/'
-MEDIA_URL = "/media/"
+#STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+#MEDIA_URL = "/media/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
-LOGIN_REDIRECT_URL = "landing"
-LOGOUT_REDIRECT_URL = "landing"
+#MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
+
+#AWS HANDLING
+#AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+#AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+#AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+#AWS_STORAGE_BUCKET_NAME ="alfa-sko-blog"
+#AWS_S3_FILE_OVERWRITE = False
+#AWS_DEFAULT_ACL = None
+
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+#before
+
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+AWS_DEFAULT_ACL = "public-read"
+AWS_QUERYSTRING_AUTH = False #getting ckeditor to work
+
+#AWS_LOCATION = 'static'
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, 'static'),
+#]
+
+#STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'myBlog.storages.MediaStore'
+
+#MEDIA_URL = '/media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

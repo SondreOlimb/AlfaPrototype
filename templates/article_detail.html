@@ -15,7 +15,7 @@
 
 <div class="container-fluid w-100 "  style="background: rgba(36, 36, 36, 0.6);   min-height: 100vh; margin-right: auto !important; margin-left:auto!important;  padding-left: 0 !important;padding-right: 0 !important" >
 
-{% if post.header_image %}
+{% if post.header_image or post.header_image_url != "0" %}
 <!--carousel begin-->
 <div id="carouselExampleIndicators" class="w-100 carousel slide" data-ride="false"  data-pause="hover">
 
@@ -23,8 +23,11 @@
 
     <div class="carousel-item active">
 
-
-      <img class="d-block w-100" src={{ post.header_image.url }} alt="First-slide" style = "object-fit: cover !important; min-width: 150vmin !important; height: 40vmax !important; " >
+    {% if post.header_image_url != "0" %}
+      <img class="d-block w-100" src="{{ post.header_image_url }}" alt="First-slide" style = "object-fit: cover !important; min-width: 150vmin !important; height: 40vmax !important; " >
+        {% else %}
+        <img class="d-block w-100" src={{ post.header_image.url }} alt="First-slide" style = "object-fit: cover !important; min-width: 150vmin !important; height: 40vmax !important; " >
+        {% endif %}
         <div class="carousel-caption  d-md-block">
              <h5 style="font-size:6vw;">{{ post.title  }}</h5>
                 <!-- <p style="font-size:2vw;">By: {{ post.author.first_name }} {{ post.author.last_name }}</p> -->
