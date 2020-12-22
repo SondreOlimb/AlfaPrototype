@@ -18,8 +18,9 @@ from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+#BASE_DIR = Path(__file__).resolve().parent.parent
+#from heroku
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -217,14 +218,14 @@ LOGOUT_REDIRECT_URL = "landing"
 #    BASE_DIR / "static"
 #]
 
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 
 #heroku
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-#STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, 'static'),
+#]
+
+#STATIC_URL = '/static/'
 #MEDIA_URL = "/media/"
 
 #MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -263,4 +264,13 @@ DEFAULT_FILE_STORAGE = 'myBlog.storages.MediaStore'
 #MEDIA_URL = '/media/'
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+#heroku
+
+
 django_heroku.settings(locals())
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
