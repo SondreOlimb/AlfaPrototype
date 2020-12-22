@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
+import dj_database_url
+from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -66,6 +69,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'myBlog.urls'
@@ -209,11 +213,17 @@ LOGOUT_REDIRECT_URL = "landing"
 
 #before
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static"
-]
+#STATICFILES_DIRS = [
+#    BASE_DIR / "static"
+#]
 
 STATIC_URL = '/static/'
+
+#heroku
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 #MEDIA_URL = "/media/"
 
@@ -252,3 +262,5 @@ DEFAULT_FILE_STORAGE = 'myBlog.storages.MediaStore'
 
 #MEDIA_URL = '/media/'
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+django_heroku.settings(locals())
