@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     "members",
     "ckeditor",
-    "django_quill",
     "storages"
 
 
