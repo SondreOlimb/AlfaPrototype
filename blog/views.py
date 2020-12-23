@@ -81,7 +81,7 @@ class ArticleDetailView(DetailView):
         if fetch_likes.strava and fetch_likes.polyline == str(0):
             auth_url = "https://www.strava.com/oauth/token"
             # activites_url = "https://www.strava.com/api/v3/athlete/activities/{4056947490}"
-            activites_url = "https://www.strava.com/api/v3/activities/" +str(fetch_likes.strava)
+            activites_url = "https://www.strava.com/api/v3/activities/" +fetch_likes.strava
 
             payload = {
                 'client_id': STRAVA_CLIENT_ID,

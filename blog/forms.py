@@ -42,7 +42,7 @@ class EditForm(forms.ModelForm):
             'title': forms.TextInput(attrs={"class": "form-control","placeholder":"Input title"}),
             'title_tag': forms.TextInput(attrs={"class": "form-control","placeholder":"Input title tag"}),
             #'author': forms.Select(attrs={"class": "form-control"}),
-            'strava': forms.NumberInput(attrs={"class": "form-control", "placeholder": "Add strava activity number"}),
+            'strava': forms.TextInput(attrs={"class": "form-control", "placeholder": "Add strava activity number"}),
             'snippet': forms.Textarea(attrs={"class": "form-control", "placeholder": "Write short introduction"}),
             'body': forms.Textarea(attrs={"class": "form-control","placeholder":"Write your blog post hear"}),
             'lat': forms.NumberInput(attrs={"class": "form-control", "placeholder": "Add latitude coordinates of destination"}),

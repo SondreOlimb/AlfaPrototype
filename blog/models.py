@@ -44,7 +44,7 @@ class Post(models.Model):
 
     shoes = models.ManyToManyField(Shoe)
     likes = models.ManyToManyField(User,related_name="blog_posts")
-    strava =models.IntegerField(default=0)
+    strava = models.CharField(max_length=255, default="0")
     lat = models.DecimalField(max_digits=10, decimal_places=8,default=0)
     lng = models.DecimalField(max_digits=11, decimal_places=8,default=0)
     polyline = models.CharField(max_length=100000, default=0)
