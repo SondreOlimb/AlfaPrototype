@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
 from .models import Post,Category,Profile,AddShoe
-from .forms import PostForm,EditForm
+from .forms import PostForm, EditForm
 from django.urls import reverse_lazy,reverse
 from django.http import HttpResponseRedirect
 from myBlog.settings import MAPBOX_KEY ,STRAVA_CLIENT_ID,STRAVA_CLIENT_SECRET,STRAVA_REFRESH_TOKEN
@@ -9,7 +9,7 @@ from myBlog.settings import MAPBOX_KEY ,STRAVA_CLIENT_ID,STRAVA_CLIENT_SECRET,ST
 import requests
 import urllib3
 import polyline
-#urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 
@@ -36,14 +36,14 @@ class AddshoeView(CreateView):
 
 
 
-choices =Category.objects.all().values_list("name","name")
+#choices =Category.objects.all().values_list("name","name")
 
-choice_list=[]
+#choice_list=[]
 
-for item in choices:
-    choice_list.append(item)
+#for item in choices:
+ #   choice_list.append(item)
 
-choice_list = choice_list[1]
+#choice_list = choice_list[1]
 
 
 class HomeView(ListView):
@@ -65,7 +65,6 @@ class HomeView(ListView):
 class ArticleDetailView(DetailView):
     model = Post
     template_name = 'article_detail.html'
-
 
     def get_context_data(self, *args, **kwargs): #this needs to bee aded to evry view that wants the category data
         cat_menu = Category.objects.all()
