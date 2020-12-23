@@ -113,7 +113,7 @@
 
 
                         {% for post in object_list %}
-                    {% if post.lat != 0 and post.lng != 0 %}
+                    {% if post.lat and post.lng and post.header_image %}
                     var marker = new mapboxgl.Marker({color: "#FF0000"})
                         .setLngLat([{{ post.lng }},{{ post.lat }}])
                         .setPopup(new mapboxgl.Popup().setHTML("<a style ='text-decoration: none; color: white '  href=\"{% url 'article-detail' post.pk %}\"  <div class=\"card bg-dark m-0 border-0\" style=\"width: 100%;\">\n" +

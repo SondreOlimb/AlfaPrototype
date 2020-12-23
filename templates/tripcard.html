@@ -131,7 +131,7 @@
 
     <div class="col-fluid order-2 align-items-center d-flex flex-column mt-0 pt-0" style="margin-bottom: -30px !important; " >
             <div class="col-fluid order-2 align-items-center d-flex flex-column mt-0 pt-0" style="  width:100%; margin-top: -30px !important;    " >
-            {% if post.strava != 0 %}
+            {% if post.strava %}
                 <div id='map'  class= "  " style=' width: 100%; height:200px; padding: 0 !important; margin: 0 !important;'></div>
                     <script>
                     mapboxgl.accessToken = "{{ mapbox_access_token }}";
@@ -168,7 +168,7 @@
                                 }
                                 });
                                 });
-                    {% if Post.lat != 0 and lng != 0 %}
+                    {% if Post.lat and Post.lng != 0 %}
                     var marker = new mapboxgl.Marker({color:"red"})
                         .setLngLat([{{ post.lng }},{{ post.lat }}])
                         .addTo(map);

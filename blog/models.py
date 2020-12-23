@@ -22,7 +22,7 @@ from tinymce.models import HTMLField
 class Shoe(models.Model):
     shoe_name = models.CharField(max_length=255)
     link_picture =models.CharField(max_length=255)
-    link_shoe = models.CharField(max_length=255,default=0)
+    link_shoe = models.CharField(max_length=255)
 
 
     def __str__(self):
@@ -39,20 +39,20 @@ class Post(models.Model):
     title_tag=models.CharField(max_length=255)
     author =models.ForeignKey(User, on_delete=models.CASCADE)  #this line deletes all elements created by this user if this user is deleted
     header_image = models.ImageField(null=True, blank=True, upload_to="images/")
-    header_image_url=models.CharField(max_length=255, default="0")
+    header_image_url=models.CharField(max_length=255,blank=True)
     #body =RichTextField(blank=True,null=True)
     #content = RichTextUploadingField(blank=True,null=True)
-    snippet = models.CharField(max_length=255)
+    snippet = models.CharField(max_length=255, blank=True)
     #body = models.TextField()
-    post_date = models.DateTimeField(auto_now_add=True)
+    post_date = models.DateTimeField(auto_now_add=True,blank=True)
     body = HTMLField(blank=True,null=True)
 
     shoes = models.ManyToManyField(Shoe)
     likes = models.ManyToManyField(User,related_name="blog_posts")
-    strava = models.CharField(max_length=255, default="0")
-    lat = models.DecimalField(max_digits=10, decimal_places=8,default=0)
-    lng = models.DecimalField(max_digits=11, decimal_places=8,default=0)
-    polyline = models.CharField(max_length=100000, default=0)
+    strava = models.CharField(max_length=255,blank=True)
+    lat = models.DecimalField(max_digits=10, decimal_places=8,blank=True,null=True)
+    lng = models.DecimalField(max_digits=11, decimal_places=8,blank=True,null=True)
+    polyline = models.CharField(max_length=100000,blank=True)
 
 
 
