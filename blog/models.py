@@ -4,6 +4,7 @@ from datetime import datetime,date
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+from tinymce.models import HTMLField
 
 
 #class Category(models.Model):
@@ -39,11 +40,12 @@ class Post(models.Model):
     author =models.ForeignKey(User, on_delete=models.CASCADE)  #this line deletes all elements created by this user if this user is deleted
     header_image = models.ImageField(null=True, blank=True, upload_to="images/")
     header_image_url=models.CharField(max_length=255, default="0")
-    body =RichTextField(blank=True,null=True)
-    content = RichTextUploadingField(blank=True,null=True)
+    #body =RichTextField(blank=True,null=True)
+    #content = RichTextUploadingField(blank=True,null=True)
     snippet = models.CharField(max_length=255)
     #body = models.TextField()
     post_date = models.DateTimeField(auto_now_add=True)
+    body = HTMLField(blank=True,null=True)
 
     shoes = models.ManyToManyField(Shoe)
     likes = models.ManyToManyField(User,related_name="blog_posts")

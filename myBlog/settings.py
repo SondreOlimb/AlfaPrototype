@@ -57,7 +57,8 @@ INSTALLED_APPS = [
     "members",
     "ckeditor",
     "storages",
-    "ckeditor_uploader"
+    "ckeditor_uploader",
+    'tinymce'
 
 
 ]

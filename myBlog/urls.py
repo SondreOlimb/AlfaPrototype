@@ -27,6 +27,7 @@ urlpatterns = [
     path('members/',include("django.contrib.auth.urls")),
     path('members/', include("members.urls")),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('tinymce/', include('tinymce.urls')),
 
 
 
