@@ -138,3 +138,8 @@ dmypy.json
 cython_debug/
 
 /media/
+venv
+*.pyc
+staticfiles
+
+getting-started/*
