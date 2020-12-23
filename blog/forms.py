@@ -1,32 +1,21 @@
 from django import forms
-from .models import Post,Category,AddShoe
+from .models import Post,Shoe
 
-shoes = AddShoe.objects.all().values_list("shoe_name","shoe_name")
 
-shoes_list=[]
 
-for item in shoes:
-    shoes_list.append(item)
 
-choices =Category.objects.all().values_list("name","name")
-
-choice_list=[]
-
-for item in choices:
-    choice_list.append(item)
 
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields =("title", "title_tag", "author","category","shoes","strava","lat","lng","header_image","header_image_url","snippet","body","polyline")
+        fields =("title", "title_tag", "author","shoes","strava","lat","lng","header_image","header_image_url","snippet","body","polyline")
 
         widgets ={
             'title': forms.TextInput(attrs={"class": "form-control","placeholder":"Input title"}),
             'title_tag': forms.TextInput(attrs={"class": "form-control","placeholder":"Input title tag"}),
             'author': forms.TextInput(attrs={"class": "form-control", "value": "","id":"user","type":"hidden"}),
             #'author': forms.Select(attrs={"class": "form-control"}),
-            'category': forms.Select(choices = choice_list, attrs={"class": "form-control"}),
-            'shoes': forms.Select(choices=shoes_list, attrs={"class": "form-control"}),
+            'shoes': forms.CheckboxSelectMultiple(),
             'body': forms.Textarea(attrs={"class": "form-control","placeholder":"Write your blog post hear"}),
             'header_image_url': forms.TextInput(attrs={"class": "form-control", "placeholder": "Input title tag"}),
             'snippet': forms.Textarea(attrs={"class": "form-control", "placeholder": "Write short introduction"}),
@@ -38,7 +27,10 @@ class PostForm(forms.ModelForm):
 
         }
 
-        #CheckboxInput
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            for AddShoe in self.fields:
+                self.fields[AddShoe].widget.attrs['class'] = 'form-control'
 
 
 class EditForm(forms.ModelForm):
@@ -55,11 +47,15 @@ class EditForm(forms.ModelForm):
             'body': forms.Textarea(attrs={"class": "form-control","placeholder":"Write your blog post hear"}),
             'lat': forms.NumberInput(attrs={"class": "form-control", "placeholder": "Add latitude coordinates of destination"}),
             'lng': forms.NumberInput(attrs={"class": "form-control", "placeholder": "Add latitude coordinates of destination"}),
-            'shoes': forms.Select(choices=shoes_list, attrs={"class": "form-control"}),
+            'shoes': forms.CheckboxSelectMultiple(),
             'header_image_url': forms.TextInput(attrs={"class": "form-control", "placeholder": "Input title tag"}),
 
 
         }
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            for AddShoe in self.fields:
+                self.fields[AddShoe].widget.attrs['class'] = 'form-control'
 
 
 

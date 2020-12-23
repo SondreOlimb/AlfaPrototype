@@ -2,14 +2,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm, Password
 from django.contrib.auth.models import User
 from blog.models import Profile
 from django import forms
-from blog.models import Profile, AddShoe
-
-shoes =AddShoe.objects.all().values_list("shoe_name","shoe_name")
-
-shoes_list=[]
-
-for item in shoes:
-    shoes_list.append(item)
+from blog.models import Profile, Shoe
 
 class ProfilePageForm(forms.ModelForm):
     class Meta:

@@ -74,31 +74,57 @@
 
 <!--Shoe element ---------------------------------------------->
 
-        <div class="col-fluid order-2 align-items-center d-flex flex-column mt-0">
-            {% for i in shoes %}
-                {% if i.shoe_name == post.shoes %}
+        <div class ="">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner text-center">
+              {% for my_shoes in post.shoes.all %}
+
+                  {% if forloop.first %}<!--ifforloop-->
+                        <div class="carousel-item active" >
+                        <a class = "text-ligth" style ='text-decoration: none; color: white ' href="{{ my_shoes.link_shoe }}">
+                        <div class ="">
+                            <div>
+                              {% if my_shoes.link_picture%}<!--if-profili-pic-->
+
+                                <img class=" d-block rounded-circle m-a"  alt="100x100" src="{{ my_shoes.link_picture }}" style = "width: 10rem; height: 10rem; margin: auto">
+                              {% else %} <!--if-profili-pic-->
+                                <img class="d-block rounded-circle "  alt="100x100" src="{% static "images/profil.png" %}" style = "width: 10rem; height: 10rem; margin: auto">
+                                {% endif %}<!--if-profili-pic-->
+                            </div>
+                            <div class ="mt-2">
+                                <h4>{{ my_shoes.shoe_name }}</h4>
+                            </div>
+                        </div>
+                        </a>
+                        </div>
+                   {% else %}<!--ifforloop-->
+                        <div class="carousel-item">
+                          <a class = "text-ligth" style ='text-decoration: none; color: white ' href="{{ my_shoes.link_shoe }}">
+                        <div class ="">
+                            <div>
+                              {% if my_shoes.link_picture%}<!--if-profili-pic-->
+
+                                <img class=" d-block rounded-circle m-a"  alt="100x100" src="{{ my_shoes.link_picture }}" style = "width: 10rem; height: 10rem; margin: auto">
+                              {% else %} <!--if-profili-pic-->
+                                <img class="d-block rounded-circle "  alt="100x100" src="{% static "images/profil.png" %}" style = "width: 10rem; height: 10rem; margin: auto">
+                                {% endif %}<!--if-profili-pic-->
+                            </div>
+                            <div class ="mt-2">
+                                <h4>{{ my_shoes.shoe_name }}</h4>
+                            </div>
+                        </div>
+                        </a>
+                        </div>
 
 
+                  {% endif %}
 
+              {% endfor %}
 
-                <a class ="text-light" style ="text-decoration: none" href="{{ i.link_shoe }}">
-                <div class="justify-content-center text-center">
-                {% if i.link_picture%}
+          </div>
 
-                    <img class="img-fluid rounded-circle mt-0 pt-0"  alt="100x100" src="{{ i.link_picture }}" style = "width: 10rem; height: 10rem">
-                {% else %}
-                    <img class="img-fluid rounded-circle mt-0 pt-0"  alt="100x100" src="{% static "images/profil.png" %}" style = "width: 10rem; height: 10rem">
-                {% endif %}
-                </div>
-                <div>
-                <h3>{{ i.shoe_name }}</h3>
-
-                    </div>
-                </a>
-                {% endif %}
-        {% endfor %}
-
-        </div>
+    </div>
+</div>
 
 
 

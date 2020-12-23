@@ -4,19 +4,19 @@ from datetime import datetime,date
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 
-class Category(models.Model):
-    name = models.CharField(max_length=255)
+#class Category(models.Model):
+ #   name = models.CharField(max_length=255)
 
 
-    def __str__(self):
-        return self.name  # lets us se the title o the blog page in the admin page
+  #  def __str__(self):
+   #     return self.name  # lets us se the title o the blog page in the admin page
 
 
-    def get_absolute_url(self):
-        return reverse("landing")  # this element loads the post after publishing
+    #def get_absolute_url(self):
+     #   return reverse("landing")  # this element loads the post after publishing
         # return reverse("blog")  #if we want to jump to return after
 
-class AddShoe(models.Model):
+class Shoe(models.Model):
     shoe_name = models.CharField(max_length=255)
     link_picture =models.CharField(max_length=255)
     link_shoe = models.CharField(max_length=255,default=0)
@@ -41,8 +41,8 @@ class Post(models.Model):
     snippet = models.CharField(max_length=255)
     #body = models.TextField()
     post_date = models.DateTimeField(auto_now_add=True)
-    category = models.CharField(max_length=255, default="uncategorized")
-    shoes = models.CharField(max_length=255, default="0")
+
+    shoes = models.ManyToManyField(Shoe)
     likes = models.ManyToManyField(User,related_name="blog_posts")
     strava =models.IntegerField(default=0)
     lat = models.DecimalField(max_digits=10, decimal_places=8,default=0)
@@ -73,7 +73,7 @@ class Profile(models.Model):
     twitter_url = models.CharField(null=True, blank=True, max_length=255)
     instagram_url = models.CharField(null=True, blank=True,max_length=255)
     pintrest_url = models.CharField(null=True, blank=True,max_length=255)
-    shoes = models.ManyToManyField(AddShoe)
+    shoes = models.ManyToManyField(Shoe)
 
 
 

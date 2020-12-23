@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
-from .models import Post,Category,Profile,AddShoe
+from .models import Post,Profile,Shoe
 from .forms import PostForm, EditForm
 from django.urls import reverse_lazy,reverse
 from django.http import HttpResponseRedirect
@@ -30,7 +30,7 @@ class TripMapView(ListView):
         return context
 
 class AddshoeView(CreateView):
-    model = AddShoe
+    model = Shoe
     template_name = "add_shoe.html"
     fields = "__all__"
 
@@ -51,12 +51,12 @@ class HomeView(ListView):
     template_name = 'blog.html'
     #ordering = ["-id"]
     ordering = ["-post_date"]
-    cats = Category.objects.all()
+    #cats = Category.objects.all()
 
     def get_context_data(self, *args, **kwargs): #this needs to bee aded to evry view that wants the category data
-        cat_menu = Category.objects.all()
+        #cat_menu = Category.objects.all()
         context = super(HomeView, self).get_context_data(*args, **kwargs)
-        context["cat_menu"] = cat_menu
+        #context["cat_menu"] = cat_menu
         return context
 
 
@@ -67,8 +67,8 @@ class ArticleDetailView(DetailView):
     template_name = 'article_detail.html'
 
     def get_context_data(self, *args, **kwargs): #this needs to bee aded to evry view that wants the category data
-        cat_menu = Category.objects.all()
-        shoes = AddShoe.objects.all()
+        #cat_menu = Category.objects.all()
+        shoes = Shoe.objects.all()
         context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
         fetch_likes = get_object_or_404(Post, id=self.kwargs["pk"])
         total_likes = fetch_likes.total_likes()
@@ -116,7 +116,7 @@ class ArticleDetailView(DetailView):
             context["poly"] = poly
 
 
-        context["cat_menu"] = cat_menu
+        #context["cat_menu"] = cat_menu
         context["total_likes"] = total_likes
         context["mapbox_access_token"] = MAPBOX_KEY
         context["liked"]=liked
@@ -152,10 +152,10 @@ class AddPostView(CreateView):
     #fields = '__all__' #This would post all the fields,
     #fields =("title","body") #we can render spesific fields this way
 
-class AddCategoryView(CreateView):
-    model = Category
-    template_name = "add_category.html"
-    fields = "__all__"
+#class AddCategoryView(CreateView):
+ #   model = Category
+  #  template_name = "add_category.html"
+   # fields = "__all__"
 class UpdatePostView(UpdateView):
     model = Post
     form_class = EditForm
@@ -167,11 +167,11 @@ class DeletePostView(DeleteView):
     template_name = "delete_post.html"
     success_url = reverse_lazy("blog")
 
-def CategoryView(request,cats):
-    category_posts = Post.objects.filter(category=cats.replace("-"," "))
-    ordering = ["-category_posts.post_date"]
+#def CategoryView(request,cats):
+#    category_posts = Post.objects.filter(category=cats.replace("-"," "))
+#   ordering = ["-category_posts.post_date"]
 
-    return render(request, "categories.html", {"cats":cats.title().replace("-"," "),"category_posts":category_posts}) #cats:cats passes the cats to the webpage
+#    return render(request, "categories.html", {"cats":cats.title().replace("-"," "),"category_posts":category_posts}) #cats:cats passes the cats to the webpage
 
 def LikeView(request,pk):
 
