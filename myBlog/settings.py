@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "members",
     "ckeditor",
     "storages",
+    "ckeditor_uploader"
 
 
 ]
