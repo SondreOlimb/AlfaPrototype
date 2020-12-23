@@ -128,7 +128,7 @@
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">- {{ post.author.first_name }} {{ post.author.last_name }} <br/> {{ post.snippet|safe}}... </p>
                     <a href="{% url "article-detail" post.pk %}" class="btn btn-secondary">Open</a>
-                        <a href="{% url "category" post.category|slugify %}" class="btn btn-secondary">{{ post.category }}</a>
+                        
 
                     </div>
                 </div>

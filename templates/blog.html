@@ -27,7 +27,9 @@
                        {% for post in object_list|slice:":3" %}
                            {% if forloop.first %}
                             <div class="carousel-item active">
+                            {% if post.header_image %}
                               <img class="d-block w-100" src="{{ post.header_image.url }}"  alt="..." style = "object-fit: cover !important; min-width: 150vmin !important; height: 40vmax !important; ">
+                                {% endif %}
                                 <div class="carousel-caption  d-md-block">
                                     <a style ="text-decoration: none" class = "text-light" href="{% url "article-detail" post.pk %}" >
                                      <h5 style="font-size:6vw;">{{ post.title  }}</h5>
@@ -39,7 +41,9 @@
                             </div>
                            {% else %}
                                <div class="carousel-item">
+                               {% if post.header_image %}
                               <img class="d-block w-100" src="{{ post.header_image.url }}"  alt="..." style = "object-fit: cover !important; min-width: 150vmin !important; height: 40vmax !important; ">
+                                   {% endif %}
                                <div class="carousel-caption  d-md-block">
                                     <a style = "color: white; text-decoration: none" class = "text-light" href="{% url "article-detail" post.pk %}" >
                                      <h5 style="font-size:6vw;">{{ post.title  }}</h5>
@@ -64,22 +68,7 @@
         </div>
 
     <br/>
-{% if cat_menu %}
 
-        <div class="dropdown d-box text-center" >
-          <button class="btn btn-dark dropdown-toggle align-self-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-            Category
-          </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              {% for item in cat_menu %}
-                <a class="dropdown-item" href="{% url "category" item|slugify %}">{{ item }}</a>
-                {% endfor %}
-
-
-              </div>
-        </div>
-    <br/>
-{% endif %}
 
 
     <div class=" container justify-content-center mx-auto  "  >
