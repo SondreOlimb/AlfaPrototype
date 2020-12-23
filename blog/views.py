@@ -78,8 +78,8 @@ class ArticleDetailView(DetailView):
             liked = True
 
          #only fetches the strava api the first time the blog is visited, after that it is saved in the database
-        if False:
-            if fetch_likes.strava and fetch_likes.polyline == str(0):
+
+        if fetch_likes.strava and fetch_likes.polyline == str(0):
                 auth_url = "https://www.strava.com/oauth/token"
                 # activites_url = "https://www.strava.com/api/v3/athlete/activities/{4056947490}"
                 activites_url = "https://www.strava.com/api/v3/activities/" +fetch_likes.strava
@@ -108,7 +108,7 @@ class ArticleDetailView(DetailView):
 
                 context["poly"] = poly
 
-            elif fetch_likes.polyline != str(0):
+        elif fetch_likes.polyline != str(0):
                 path = polyline.decode(fetch_likes.polyline, geojson=True)
                 poly = []
                 for i in path:
