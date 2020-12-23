@@ -100,7 +100,7 @@
                 {% include "tripcard.html" %}
           </div>
     </div>
-    <div class="col-12 col-md-6 order-1 order-md-1"  >
+    <div class="col-12 col-md-6 order-1 order-md-1 d-block d-lg-none"  >
 
         <strong><h4 style ="font-size: max(2vw, 2vh); font-weight: bold">{{ post.snippet|safe}} </h4></strong>
         <br/>
@@ -110,6 +110,7 @@
 
     </div>
       <div class = "col-12 col-md-8  order-3 order-md-2" >
+          <strong><h4 class ="d-none d-lg-block" style ="font-size: max(2vw, 2vh); font-weight: bold">{{ post.snippet|safe}} </h4></strong>
           <br/>
           <h5>{{ post.body|safe }}</h5>
           <a href="{% url "blog" %}" class="btn btn-secondary">Back</a>
