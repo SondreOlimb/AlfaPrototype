@@ -1,4 +1,3 @@
-'''
 from django import forms
 from .models import Post,Category,AddShoe
 
@@ -63,5 +62,5 @@ class EditForm(forms.ModelForm):
         }
 
 
-'''
+
 
