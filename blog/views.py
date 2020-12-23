@@ -78,42 +78,43 @@ class ArticleDetailView(DetailView):
             liked = True
 
          #only fetches the strava api the first time the blog is visited, after that it is saved in the database
-        if fetch_likes.strava and fetch_likes.polyline == str(0):
-            auth_url = "https://www.strava.com/oauth/token"
-            # activites_url = "https://www.strava.com/api/v3/athlete/activities/{4056947490}"
-            activites_url = "https://www.strava.com/api/v3/activities/" +fetch_likes.strava
+        if fetch_likes.strava != "0":
+            if fetch_likes.strava and fetch_likes.polyline == str(0):
+                auth_url = "https://www.strava.com/oauth/token"
+                # activites_url = "https://www.strava.com/api/v3/athlete/activities/{4056947490}"
+                activites_url = "https://www.strava.com/api/v3/activities/" +fetch_likes.strava
 
-            payload = {
-                'client_id': STRAVA_CLIENT_ID,
-                'client_secret': STRAVA_CLIENT_SECRET,
-                'refresh_token': STRAVA_REFRESH_TOKEN,
-                'grant_type': "refresh_token",
-                'f': 'json'
-            }
+                payload = {
+                    'client_id': STRAVA_CLIENT_ID,
+                    'client_secret': STRAVA_CLIENT_SECRET,
+                    'refresh_token': STRAVA_REFRESH_TOKEN,
+                    'grant_type': "refresh_token",
+                    'f': 'json'
+                }
 
-            res = requests.post(auth_url, data=payload, verify=False)
-            access_token = res.json()["access_token"]
+                res = requests.post(auth_url, data=payload, verify=False)
+                access_token = res.json()["access_token"]
 
-            header = {'Authorization': 'Bearer ' + access_token}
-            param = {'per_page': 2, 'page': 1}
-            my_dataset = requests.get(activites_url, headers=header, params=param).json()
-            strava_tempsave = my_dataset["map"]["polyline"]
-            path = polyline.decode(strava_tempsave, geojson=True)
-            fetch_likes.polyline = strava_tempsave
-            fetch_likes.save()
-            poly = []
-            for i in path:
-                poly.append([i[0], i[1]])
+                header = {'Authorization': 'Bearer ' + access_token}
+                param = {'per_page': 2, 'page': 1}
+                my_dataset = requests.get(activites_url, headers=header, params=param).json()
+                strava_tempsave = my_dataset["map"]["polyline"]
+                path = polyline.decode(strava_tempsave, geojson=True)
+                fetch_likes.polyline = strava_tempsave
+                fetch_likes.save()
+                poly = []
+                for i in path:
+                    poly.append([i[0], i[1]])
 
-            context["poly"] = poly
+                context["poly"] = poly
 
-        elif fetch_likes.polyline != str(0):
-            path = polyline.decode(fetch_likes.polyline, geojson=True)
-            poly = []
-            for i in path:
-                poly.append([i[0], i[1]])
+            elif fetch_likes.polyline != str(0):
+                path = polyline.decode(fetch_likes.polyline, geojson=True)
+                poly = []
+                for i in path:
+                    poly.append([i[0], i[1]])
 
-            context["poly"] = poly
+                context["poly"] = poly
 
 
         #context["cat_menu"] = cat_menu
