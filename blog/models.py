@@ -3,6 +3,8 @@ from django.urls import reverse
 from datetime import datetime,date
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
+
 
 #class Category(models.Model):
  #   name = models.CharField(max_length=255)
@@ -38,6 +40,7 @@ class Post(models.Model):
     header_image = models.ImageField(null=True, blank=True, upload_to="images/")
     header_image_url=models.CharField(max_length=255, default="0")
     body =RichTextField(blank=True,null=True)
+    content = RichTextUploadingField(blank=True,null=True)
     snippet = models.CharField(max_length=255)
     #body = models.TextField()
     post_date = models.DateTimeField(auto_now_add=True)

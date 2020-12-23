@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from blog import views
+
 
 
 urlpatterns = [
@@ -24,6 +26,7 @@ urlpatterns = [
     path('', include("blog.urls")),
     path('members/',include("django.contrib.auth.urls")),
     path('members/', include("members.urls")),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 
 
 
