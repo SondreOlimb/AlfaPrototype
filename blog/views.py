@@ -9,12 +9,9 @@ from myBlog.settings import MAPBOX_KEY ,STRAVA_CLIENT_ID,STRAVA_CLIENT_SECRET,ST
 import requests
 import urllib3
 import polyline
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+#urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-class AddshoeView(CreateView):
-    model = AddShoe
-    template_name = "add_shoe.html"
-    fields = "__all__"
+
 
 
 
@@ -31,6 +28,11 @@ class TripMapView(ListView):
         context["mapbox_access_token"] = MAPBOX_KEY
 
         return context
+
+class AddshoeView(CreateView):
+    model = AddShoe
+    template_name = "add_shoe.html"
+    fields = "__all__"
 
 
 
