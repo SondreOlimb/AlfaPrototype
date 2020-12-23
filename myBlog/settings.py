@@ -32,9 +32,9 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 #API KEYS
 MAPBOX_KEY = os.environ.get("MAPBOX_API_KEY")
-STRAVA_CLIENT_ID = os.environ.get("STRAVA_client_id")
-STRAVA_CLIENT_SECRET = os.environ.get("STRAVA_client_secret")
-STRAVA_REFRESH_TOKEN = os.environ.get("STRAVA_refresh_token")
+STRAVA_CLIENT_ID = os.environ.get("STRAVA_CLIENT_ID")
+STRAVA_CLIENT_SECRET = os.environ.get("STRAVA_CLIENT_SECRET")
+STRAVA_REFRESH_TOKEN = os.environ.get("STRAVA_REFRESH_TOKEN")
 
 
 
@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     "members",
     "ckeditor",
-    "storages"
+    "storages",
+    "ckeditor_uploader"
 
 
 ]
