@@ -78,7 +78,7 @@ class ArticleDetailView(DetailView):
             liked = True
 
          #only fetches the strava api the first time the blog is visited, after that it is saved in the database
-        if fetch_likes.strava != "0":
+        if False:
             if fetch_likes.strava and fetch_likes.polyline == str(0):
                 auth_url = "https://www.strava.com/oauth/token"
                 # activites_url = "https://www.strava.com/api/v3/athlete/activities/{4056947490}"
