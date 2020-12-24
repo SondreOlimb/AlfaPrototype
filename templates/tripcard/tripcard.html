@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+{% block content %}
+<head>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+
+<!--forntaawsome-->
+      <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
+      <link href="/your-path-to-fontawesome/css/brands.css" rel="stylesheet">
+      <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet">
+    <!-- fontaawsome end-->
+</head>
+
+    <script>
+    function myFunction(x) {
+  x.classList.toggle("fa-angle-up");
+}
+    </script>
+
+
+
+
+
+
+
+
+<div class ="column shadow  rounded bg-dark mt-0 pt-0"  >
+<br/>
+        {% include "tripcard/profile_element.html" %}
+
+
+
+<!--Shoe element ---------------------------------------------->
+
+       {% include "tripcard/shoe_element.html" %}
+<!--- end shoe element-->
+
+<!--- map---->
+        {% include "tripcard/map_element.html" %}
+
+
+
+</div>
+
+
+{% endblock %}
