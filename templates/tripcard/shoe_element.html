@@ -9,6 +9,8 @@
           <div class="carousel-inner text-center">
               {% for my_shoes in post.shoes.all %}
 
+
+
                   {% if forloop.first %}<!--ifforloop-->
                         <div class="carousel-item active" >
                         <a class = "text-ligth" style ='text-decoration: none; color: white ' href="{{ my_shoes.link_shoe }}">
@@ -26,60 +28,36 @@
                             </div>
                         </div>
                         </a>
-                        </div>
-                   {% else %}<!--ifforloop-->
-                        <div class="carousel-item">
-                          <a class = "text-ligth" style ='text-decoration: none; color: white ' href="{{ my_shoes.link_shoe }}">
-                        <div class ="">
-                            <div>
-                              {% if my_shoes.link_picture%}<!--if-profili-pic-->
-
-                                <img class=" d-block rounded-circle m-a"  alt="100x100" src="{{ my_shoes.link_picture }}" style = "width: 10rem; height: 10rem; margin: auto">
-                              {% else %} <!--if-profili-pic-->
-                                <img class="d-block rounded-circle "  alt="100x100" src="{% static "images/profil.png" %}" style = "width: 10rem; height: 10rem; margin: auto">
-                                {% endif %}<!--if-profili-pic-->
-                            </div>
-                            <div class ="mt-2">
-                                <h4>{{ my_shoes.shoe_name }}</h4>
-                            </div>
-                        </div>
-                        </a>
-                        </div>
 
 
-                  {% endif %}
-
-              {% endfor %}
-
-          </div>
-
-    </div>
-
-        <div class="text-center ">
+                        <!-- shoe elment-->
+                        <div class="text-center ">
             <div class="collapse" id="collapseShoe" style="width: 100%">
           <div class="card bg-dark card-body align-items-center d-flex border-0" style="width: 100%">
+
                 Water resistance
+
 
 
                 <div class="d-block w-100">
                     <div class="progress">
-                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width: 83%; background-color: rgb(52, 125, 241);"></div>
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.water_resistance }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.water_resistance }}%; background-color: rgb(52, 125, 241);"></div>
                     </div>
                     Breathability
                     <div class="progress">
-                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width: 83%; background-color: rgb(52, 125, 241);"></div>
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.breathability }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.breathability }}%; background-color: rgb(52, 125, 241);"></div>
                     </div>
                     Sole stiffness
                     <div class="progress">
-                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width: 83%; background-color: rgb(52, 125, 241);"></div>
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.sole_stiffness }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.sole_stiffness }}%; background-color: rgb(52, 125, 241);"></div>
                     </div>
                     Isolation
                     <div class="progress">
-                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%; background-color: rgb(52, 125, 241);"></div>
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.isolation }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.isolation }}%; background-color: rgb(52, 125, 241);"></div>
                     </div>
                     Ankle stabilization
                     <div class="progress">
-                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%; background-color: rgb(52, 125, 241);"></div>
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.ankle_stabilization }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.ankle_stabilization }}%; background-color: rgb(52, 125, 241);"></div>
                     </div>
 
 
@@ -99,6 +77,53 @@
       </a>
         </p>
             </div>
+                        <!--end shoe element-->
+                        </div>
+                   {% else %}<!--ifforloop-->
+                        <div class="carousel-item">
+                          <a class = "text-ligth" style ='text-decoration: none; color: white ' href="{{ my_shoes.link_shoe }}">
+                        <div class ="">
+                            <div>
+                              {% if my_shoes.link_picture%}<!--if-profili-pic-->
+
+                                <img class=" d-block rounded-circle m-a"  alt="100x100" src="{{ my_shoes.link_picture }}" style = "width: 10rem; height: 10rem; margin: auto">
+                              {% else %} <!--if-profili-pic-->
+                                <img class="d-block rounded-circle "  alt="100x100" src="{% static "images/profil.png" %}" style = "width: 10rem; height: 10rem; margin: auto">
+                                {% endif %}<!--if-profili-pic-->
+                            </div>
+                            <div class ="mt-2">
+                                <h4>{{ my_shoes.shoe_name }}</h4>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                        </a>
+                        <!---Shoe collaps--->
+
+
+                        </div>
+
+
+
+                  {% endif %}
+
+              {% endfor %}
+
+          </div>
+
+    </div>
+
+
+
         </div>
 
 

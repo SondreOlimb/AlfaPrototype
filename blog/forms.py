@@ -1,8 +1,21 @@
 from django import forms
 from .models import Post,Shoe
 
+class ShoeForm(forms.ModelForm):
+    class Meta:
+        model = Shoe
+        fields = ("shoe_name","link_picture","link_shoe","water_resistance","breathability","sole_stiffness","isolation","ankle_stabilization")
+        widgets ={
+                'shoe_name' : forms.TextInput(attrs={"class": "form-control","placeholder":"Input shoe name"}),
+                'link_picture': forms.TextInput(attrs={"class": "form-control","placeholder":"Input link to shoe picture"}),
+                'link_shoe' : forms.TextInput(attrs={"class": "form-control","placeholder":"Input title"}),
+                'water_resistance': forms.Select(choices=["20","40","60","80","100"]),
 
-
+                'breathability': forms.Select(choices=["20","40","60","80","100"]),
+                'sole_stiffness': forms.Select(choices=["20","40","60","80","100"]),
+                'isolation': forms.Select(choices=["20","40","60","80","100"]),
+                'ankle_stabilization': forms.Select(choices=["20","40","60","80","100"]),
+        }
 
 
 class PostForm(forms.ModelForm):

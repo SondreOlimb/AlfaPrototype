@@ -20,4 +20,5 @@ urlpatterns = [
     path('newshoe/',AddshoeView.as_view(),name="add_shoe"),
 
 
+
 ]

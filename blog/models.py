@@ -23,6 +23,14 @@ class Shoe(models.Model):
     shoe_name = models.CharField(max_length=255)
     link_picture =models.CharField(max_length=255)
     link_shoe = models.CharField(max_length=255)
+    water_resistance = models.IntegerField(blank=True, default=60)
+    breathability = models.IntegerField(blank=True, default=60)
+    sole_stiffness= models.IntegerField(blank=True, default=60)
+    isolation = models.IntegerField(blank=True, default=60)
+    ankle_stabilization = models.IntegerField(blank=True, default=60)
+
+
+
 
 
     def __str__(self):

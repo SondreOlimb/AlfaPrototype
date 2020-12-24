@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
 from .models import Post,Profile,Shoe
-from .forms import PostForm, EditForm
+from .forms import PostForm, EditForm, ShoeForm
 from django.urls import reverse_lazy,reverse
 from django.http import HttpResponseRedirect
 from myBlog.settings import MAPBOX_KEY ,STRAVA_CLIENT_ID,STRAVA_CLIENT_SECRET,STRAVA_REFRESH_TOKEN
@@ -32,7 +32,9 @@ class TripMapView(ListView):
 class AddshoeView(CreateView):
     model = Shoe
     template_name = "add_shoe.html"
-    fields = "__all__"
+    fields = ShoeForm
+
+
 
 
 
@@ -69,6 +71,7 @@ class ArticleDetailView(DetailView):
     def get_context_data(self, *args, **kwargs): #this needs to bee aded to evry view that wants the category data
         #cat_menu = Category.objects.all()
         shoes = Shoe.objects.all()
+
         context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
         fetch_likes = get_object_or_404(Post, id=self.kwargs["pk"])
         total_likes = fetch_likes.total_likes()
