@@ -32,7 +32,7 @@ class TripMapView(ListView):
 class AddshoeView(CreateView):
     model = Shoe
     template_name = "add_shoe.html"
-    fields = ShoeForm
+    form_class = ShoeForm
 
 
 
