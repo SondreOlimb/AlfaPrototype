@@ -2,6 +2,12 @@
 {% load static %}
 
 {% block content %}
+
+     <script>
+    function myFunction(x) {
+  x.classList.toggle("fa-angle-up");
+}
+    </script>
 <div class="container-fluid justify-content-center text-center"  style="background: rgba(36, 36, 36, 0.6);   min-height: 100vh; margin-right: auto !important; margin-left:auto!important;  padding-left: 0 !important;padding-right: 0 !important" >
 </br>
         <div class="row justify-content-center text-center m-0 p-0 "  >
@@ -41,6 +47,56 @@
                         </div>
                      </a>
 
+                   <!--- shoe grading-->
+                        <div class="text-center ">
+            <div class="collapse" id="collapse{{ forloop.counter }}" style="width: 100%">
+          <div class="card bg-dark card-body align-items-center d-flex border-0" style="width: 100%">
+
+                Water resistance
+
+
+
+                <div class="d-block w-100">
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.water_resistance }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.water_resistance }}%; background-color: rgb(52, 125, 241);"></div>
+                    </div>
+                    Breathability
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.breathability }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.breathability }}%; background-color: rgb(52, 125, 241);"></div>
+                    </div>
+                    Sole stiffness
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.sole_stiffness }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.sole_stiffness }}%; background-color: rgb(52, 125, 241);"></div>
+                    </div>
+                    Isolation
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.isolation }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.isolation }}%; background-color: rgb(52, 125, 241);"></div>
+                    </div>
+                    Ankle stabilization
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.ankle_stabilization }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.ankle_stabilization }}%; background-color: rgb(52, 125, 241);"></div>
+                    </div>
+
+
+
+                </div>
+
+
+
+
+          </div>
+        </div>
+
+        <p>
+
+      <a style = " margin: 0 !important; padding: 0 !important;" class="btn btn-transparent  " type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="collapseMap">
+         <i onclick="myFunction(this)"  class="fas fa-angle-down fa-2x" style="color:red" ></i>
+      </a>
+        </p>
+            </div>
+
+                        <!---end shoe--->
+
                    </div>
                 {% endfor %}
          </div>
@@ -69,6 +125,55 @@
                             </div>
                         </div>
                         </a>
+                        <!--- shoe grading-->
+                        <div class="text-center ">
+            <div class="collapse" id="collapseShoe" style="width: 100%">
+          <div class="card bg-dark card-body align-items-center d-flex border-0" style="width: 100%">
+
+                Water resistance
+
+
+
+                <div class="d-block w-100">
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.water_resistance }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.water_resistance }}%; background-color: rgb(52, 125, 241);"></div>
+                    </div>
+                    Breathability
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.breathability }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.breathability }}%; background-color: rgb(52, 125, 241);"></div>
+                    </div>
+                    Sole stiffness
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.sole_stiffness }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.sole_stiffness }}%; background-color: rgb(52, 125, 241);"></div>
+                    </div>
+                    Isolation
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.isolation }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.isolation }}%; background-color: rgb(52, 125, 241);"></div>
+                    </div>
+                    Ankle stabilization
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.ankle_stabilization }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.ankle_stabilization }}%; background-color: rgb(52, 125, 241);"></div>
+                    </div>
+
+
+
+                </div>
+
+
+
+
+          </div>
+        </div>
+
+        <p>
+
+      <a style = " margin: 0 !important; padding: 0 !important;" class="btn btn-transparent  " type="button" data-toggle="collapse" data-target="#collapseShoe" aria-expanded="false" aria-controls="collapseMap">
+         <i onclick="myFunction(this)"  class="fas fa-angle-down fa-2x" style="color:red" ></i>
+      </a>
+        </p>
+            </div>
+
+                        <!---end shoe--->
                         </div>
                    {% else %}<!--ifforloop-->
                         <div class="carousel-item">
@@ -87,6 +192,55 @@
                             </div>
                         </div>
                         </a>
+                        <!--- shoe grading-->
+                        <div class="text-center ">
+            <div class="collapse" id="collapseShoe" style="width: 100%">
+          <div class="card bg-dark card-body align-items-center d-flex border-0" style="width: 100%">
+
+                Water resistance
+
+
+
+                <div class="d-block w-100">
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.water_resistance }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.water_resistance }}%; background-color: rgb(52, 125, 241);"></div>
+                    </div>
+                    Breathability
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.breathability }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.breathability }}%; background-color: rgb(52, 125, 241);"></div>
+                    </div>
+                    Sole stiffness
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.sole_stiffness }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.sole_stiffness }}%; background-color: rgb(52, 125, 241);"></div>
+                    </div>
+                    Isolation
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.isolation }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.isolation }}%; background-color: rgb(52, 125, 241);"></div>
+                    </div>
+                    Ankle stabilization
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ my_shoes.ankle_stabilization }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ my_shoes.ankle_stabilization }}%; background-color: rgb(52, 125, 241);"></div>
+                    </div>
+
+
+
+                </div>
+
+
+
+
+          </div>
+        </div>
+
+        <p>
+
+      <a style = " margin: 0 !important; padding: 0 !important;" class="btn btn-transparent  " type="button" data-toggle="collapse" data-target="#collapseShoe" aria-expanded="false" aria-controls="collapseMap">
+         <i onclick="myFunction(this)"  class="fas fa-angle-down fa-2x" style="color:red" ></i>
+      </a>
+        </p>
+            </div>
+
+                        <!---end shoe--->
                         </div>
 
 
