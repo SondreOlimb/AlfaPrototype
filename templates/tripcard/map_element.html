@@ -51,7 +51,7 @@
                                 }
                                 });
                                 });
-                    {% if Post.lat and Post.lng != 0 %}
+                    {% if Post.lat and Post.lng %}
                     var marker = new mapboxgl.Marker({color:"red"})
                         .setLngLat([{{ post.lng }},{{ post.lat }}])
                         .addTo(map);

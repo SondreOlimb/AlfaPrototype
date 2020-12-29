@@ -4,10 +4,9 @@
 {% endblock %}
 {% block content %}
 
-    <style>
-
-    </style>
-
+    <head>
+    {{ form.media }}
+    </head>
 
 
 {% if user.is_authenticated %}
@@ -18,7 +17,14 @@
             {% csrf_token %}
             {{ form.media }}
             {{ form.as_p }}
-            <button  class="btn btn-dark">Post</button>
+
+
+
+
+
+
+
+
 
 
         </form>
